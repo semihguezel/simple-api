@@ -1,0 +1,28 @@
+# Build klasörü ve derleme dosyaları
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Derlenmiş ikili dosyalar
+simple_api
+*.exe
+*.out
+*.app
+
+# Nesne dosyaları
+*.o
+*.obj
+
+# Geçici dosyalar
+*.log
+*.tmp
+*.cache
+
+# Sistem dosyaları
+.DS_Store
+Thumbs.db
+
+# Visual Studio Code ayarları
+.vscode/
