@@ -21,22 +21,22 @@ This project is a simple RESTful API application using **CrowCpp**. The applicat
 
 ### 1. Install Minikube and kubectl
 
-# Download kubectl
+## Download kubectl
 curl -LO "https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl"
 
-# Make it executable
+## Make it executable
 chmod +x ./kubectl
 
-# Move it to your PATH
+## Move it to your PATH
 sudo mv ./kubectl /usr/local/bin/kubectl
 
-# Download Minikube
+## Download Minikube
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 
-# Install Minikube
+## Install Minikube
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
-# Start Minikube
+## Start Minikube
 minikube start --driver=docker
 
 ### 2. Install Minikube and kubectl
