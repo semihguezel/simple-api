@@ -1,6 +1,7 @@
 #include "crow_all.h"
 #include <vector>
 #include <mutex>
+#include <cstdlib>
 
 std::vector<std::string> notes;
 std::mutex notes_mutex;
@@ -9,10 +10,19 @@ int main()
 {
     crow::SimpleApp app;
 
+    // Ortam değişkenlerinden yapılandırma ayarlarını al
+    const char* port_str = std::getenv("APP_PORT");
+    uint16_t port = port_str ? static_cast<uint16_t>(std::stoi(port_str)) : 9080;
+
+    const char* message = std::getenv("APP_MESSAGE");
+    if (!message) {
+        message = "Merhaba Dünya!";
+    }
+
     // /hello endpoint'i
     CROW_ROUTE(app, "/hello")
-    ([](){
-        return "Merhaba Dünya!";
+    ([message](){
+        return std::string(message);
     });
 
     // /notes endpoint'i (GET)
@@ -35,5 +45,5 @@ int main()
         return "Not eklendi.";
     });
 
-    app.port(9080).multithreaded().run();
+    app.port(port).multithreaded().run();
 }

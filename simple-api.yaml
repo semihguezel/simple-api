@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-api-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: simple-api
+  template:
+    metadata:
+      labels:
+        app: simple-api
+    spec:
+      containers:
+      - name: simple-api
+        image: stonebrothers/simple_api:0.1
+        ports:
+        - containerPort: 9080
+        env:
+        - name: APP_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: simple-api-config
+              key: APP_PORT
+        - name: APP_MESSAGE
+          valueFrom:
+            configMapKeyRef:
+              name: simple-api-config
+              key: APP_MESSAGE
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-api-service
+spec:
+  type: NodePort
+  selector:
+    app: simple-api
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 9080
+    nodePort: 30080
